@@ -3,15 +3,37 @@
     <div class="handle-box">
       <el-button @click="deleteAll">批量删除</el-button>
       <el-input v-model="searchWord" placeholder="筛选关键词"></el-input>
-      <el-button type="primary" @click="centerDialogVisible = true">添加歌单</el-button>
+      <el-button type="primary" @click="centerDialogVisible = true"
+        >添加歌单</el-button
+      >
     </div>
-    <el-table height="550px" border size="small" :data="data" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="40" align="center"></el-table-column>
-      <el-table-column label="ID" prop="id" width="50" align="center"></el-table-column>
+    <el-table
+      height="550px"
+      border
+      size="small"
+      :data="data"
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column
+        type="selection"
+        width="40"
+        align="center"
+      ></el-table-column>
+      <el-table-column
+        label="ID"
+        prop="id"
+        width="50"
+        align="center"
+      ></el-table-column>
       <el-table-column label="歌单图片" width="110" align="center">
         <template v-slot="scope">
           <img :src="attachImageUrl(scope.row.pic)" style="width: 80px" />
-          <el-upload :action="uploadUrl(scope.row.id)" :show-file-list="false" :on-success="handleImgSuccess" :before-upload="beforeImgUpload">
+          <el-upload
+            :action="uploadUrl(scope.row.id)"
+            :show-file-list="false"
+            :on-success="handleImgSuccess"
+            :before-upload="beforeImgUpload"
+          >
             <el-button>更新图片</el-button>
           </el-upload>
         </template>
@@ -38,7 +60,9 @@
       <el-table-column label="操作" width="160" align="center">
         <template v-slot="scope">
           <el-button @click="editRow(scope.row)">编辑</el-button>
-          <el-button type="danger" @click="deleteRow(scope.row.id)">删除</el-button>
+          <el-button type="danger" @click="deleteRow(scope.row.id)"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -97,11 +121,22 @@
   </el-dialog>
 
   <!-- 删除提示框 -->
-  <yin-del-dialog :delVisible="delVisible" @confirm="confirm" @cancelRow="delVisible = $event"></yin-del-dialog>
+  <yin-del-dialog
+    :delVisible="delVisible"
+    @confirm="confirm"
+    @cancelRow="delVisible = $event"
+  ></yin-del-dialog>
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, watch, ref, reactive, computed } from "vue";
+import {
+  defineComponent,
+  getCurrentInstance,
+  watch,
+  ref,
+  reactive,
+  computed,
+} from "vue";
 import mixin from "@/mixins/mixin";
 import { HttpManager } from "@/api/index";
 import { RouterName } from "@/enums";
@@ -122,7 +157,10 @@ export default defineComponent({
 
     // 计算当前表格中的数据
     const data = computed(() => {
-      return tableData.value.slice((currentPage.value - 1) * pageSize.value, currentPage.value * pageSize.value);
+      return tableData.value.slice(
+        (currentPage.value - 1) * pageSize.value,
+        currentPage.value * pageSize.value
+      );
     });
 
     const searchWord = ref(""); // 记录输入框输入的内容
@@ -181,7 +219,10 @@ export default defineComponent({
         },
       ]);
       proxy.$store.commit("setBreadcrumbList", breadcrumbList);
-      routerManager(RouterName.ListSong, { path: RouterName.ListSong, query: { id } });
+      routerManager(RouterName.ListSong, {
+        path: RouterName.ListSong,
+        query: { id },
+      });
     }
     function goCommentPage(id) {
       const breadcrumbList = reactive([
@@ -195,7 +236,10 @@ export default defineComponent({
         },
       ]);
       proxy.$store.commit("setBreadcrumbList", breadcrumbList);
-      routerManager(RouterName.Comment, { path: RouterName.Comment, query: { id, type: 1 } });
+      routerManager(RouterName.Comment, {
+        path: RouterName.Comment,
+        query: { id, type: 1 },
+      });
     }
 
     /**
@@ -256,7 +300,9 @@ export default defineComponent({
       params.append("introduction", editForm.introduction);
       params.append("style", editForm.style);
 
-      const result = (await HttpManager.updateSongListMsg(params)) as ResponseBody;
+      const result = (await HttpManager.updateSongListMsg(
+        params
+      )) as ResponseBody;
       (proxy as any).$message({
         message: result.message,
         type: result.type,
@@ -274,7 +320,9 @@ export default defineComponent({
     const delVisible = ref(false); // 显示删除框
 
     async function confirm() {
-      const result = await HttpManager.deleteSongList(idx.value) as ResponseBody;
+      const result = (await HttpManager.deleteSongList(
+        idx.value
+      )) as ResponseBody;
       (proxy as any).$message({
         message: result.message,
         type: result.type,

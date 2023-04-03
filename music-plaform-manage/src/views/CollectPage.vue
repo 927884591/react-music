@@ -1,6 +1,10 @@
 <template>
   <el-breadcrumb class="crumbs" separator="/">
-    <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.name" :to="{ path: item.path, query: item.query }">
+    <el-breadcrumb-item
+      v-for="item in breadcrumbList"
+      :key="item.name"
+      :to="{ path: item.path, query: item.query }"
+    >
       {{ item.name }}
     </el-breadcrumb-item>
   </el-breadcrumb>
@@ -10,19 +14,35 @@
       <el-button @click="deleteAll">批量删除</el-button>
       <el-input placeholder="筛选歌曲" v-model="searchWord"></el-input>
     </div>
-    <el-table height="550px" border size="small" :data="tableData" @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="40" align="center"></el-table-column>
+    <el-table
+      height="550px"
+      border
+      size="small"
+      :data="tableData"
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column
+        type="selection"
+        width="40"
+        align="center"
+      ></el-table-column>
       <el-table-column prop="name" label="歌手-歌曲"></el-table-column>
       <el-table-column label="操作" width="90" align="center">
         <template v-slot="scope">
-          <el-button type="danger" @click="deleteRow(scope.row.id)">删除</el-button>
+          <el-button type="danger" @click="deleteRow(scope.row.id)"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
   </div>
 
   <!-- 删除提示框 -->
-  <yin-del-dialog :delVisible="delVisible" @confirm="confirm" @cancelRow="delVisible = $event"></yin-del-dialog>
+  <yin-del-dialog
+    :delVisible="delVisible"
+    @confirm="confirm"
+    @cancelRow="delVisible = $event"
+  ></yin-del-dialog>
 </template>
 
 <script lang="ts">
@@ -70,9 +90,11 @@ export default defineComponent({
     async function getData() {
       tableData.value = [];
       tempDate.value = [];
-      const result = (await HttpManager.getCollectionOfUser(proxy.$route.query.id)) as any;
+      const result = (await HttpManager.getCollectionOfUser(
+        proxy.$route.query.id
+      )) as any;
       for (let item of result.data) {
-        const result = await HttpManager.getSongOfId(item.songId) as any;
+        const result = (await HttpManager.getSongOfId(item.songId)) as any;
         tableData.value.push(result.data[0]);
         tempDate.value.push(result.data[0]);
       }
@@ -86,7 +108,10 @@ export default defineComponent({
     const delVisible = ref(false); // 显示删除框
 
     async function confirm() {
-      const result = (await HttpManager.deleteCollection(proxy.$route.query.id, idx.value)) as ResponseBody;
+      const result = (await HttpManager.deleteCollection(
+        proxy.$route.query.id,
+        idx.value
+      )) as ResponseBody;
       (proxy as any).$message({
         message: result.message,
         type: result.type,
