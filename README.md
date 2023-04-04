@@ -18,9 +18,9 @@
 
 > 前台截图预览
 
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h1gjdm8x3jj21c00u00ui.jpg)<br/>
+![](https://files.catbox.moe/92pgh7.png)<br/>
 
-![](https://tva1.sinaimg.cn/large/e6c9d24ely1h1gje55hgxj21c00u0n3v.jpg)<br/>
+![](https://files.catbox.moe/cj9tmb.png)<br/>
 
 ![](https://tva1.sinaimg.cn/large/e6c9d24ely1h1gk5fxmwxj21c00u0wm2.jpg)<br/>
 
@@ -79,7 +79,13 @@
 
 ### 前端
 
-**Vue3.0 + TypeScript + Vue-Router + Vuex + Axios + ElementPlus + Echarts**
+#### 后台页面
+
+**Vue3.0 + TypeScript + Vue-Router + Vuex + Axios + ElementPlus + Echarts + Vite**
+
+#### 前台页面
+
+**React18 + TypeScript + React-Router + zustand + Axios + Ant Design + Echarts + Vite**
 
 <br/>
 
@@ -87,11 +93,11 @@
 
 JDK： jdk-8u141
 
-mysql：mysql-5.7.21-1-macos10.13-x86_64（或者更高版本）
+mysql：mysql-8.0.21-1（或者更高版本）
 
-node：v14.17.3
+node：v18.15.0
 
-IDE：IntelliJ IDEA 2018、VSCode
+IDE：IntelliJ IDEA 2023、VSCode
 
 
 <br/>
@@ -101,10 +107,7 @@ IDE：IntelliJ IDEA 2018、VSCode
 ### 1、下载项目到本地
 
 ```bash
-git clone git@github.com:Yin-Hongwei/music-website.git
-
-# 上面下载慢可以用下面这个
-git clone git@gitee.com:Yin-hongwei/music-website.git
+git clone https://github.com/927884591/react-music.git
 ```
 
 ### 2、下载数据库中记录的资源
@@ -140,7 +143,7 @@ mvn spring-boot:run // 前提装了 maven
 ```js
 npm install // 安装依赖
 
-npm run serve // 启动前台项目
+npm run dev // 启动前台项目
 ```
 
 - **启动管理端**：进入 music-manage 目录，运行下面命令
@@ -148,33 +151,8 @@ npm run serve // 启动前台项目
 ```js
 npm install // 安装依赖
 
-npm run serve // 启动后台管理项目
+npm run dev // 启动后台管理项目
 ```
 
 <br/>
-
-## 赞助
-
-如果此项目对你确实有帮助，欢迎给我打赏一杯咖啡～😄
-
-<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gsgm6jokvaj30gs0feadd.jpg" height="300px"/>
-
-<br/>
-
-## 联系方式
-
-**1、邮箱📮：[yinhongwei96@126.com](mailto:yinhongwei96@126.com)**
-
-**2、微信公众号**
-
-> **目前公众号的定位主要是临时帮大家解决问题，不发表其他东西，有疑问可以临时联系。**
-
-<img src="https://p.ipic.vip/1xx9md.png"/>
-
-
-<br/>
-
-## License
-
-Copyright (c) 2018 Yin-Hongwei 
 
