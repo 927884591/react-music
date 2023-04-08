@@ -99,30 +99,33 @@ export default styled.div`
         animation-play-state: running;
       }
     }
+    .right {
+      .lyric {
+        flex: 1;
+        overflow: hidden;
 
-    .lyric {
-      flex: 1;
-      overflow: hidden;
+        .name {
+          padding: 30px 0 10px;
+          font-size: 2em;
+          font-weight: 700;
+        }
 
-      .name {
-        padding: 30px 0 10px;
-        font-size: 2em;
-        font-weight: 700;
-      }
-
-      .artists {
-        margin-bottom: 15px;
-        font-size: 1em;
-        font-weight: 600;
-        span {
-          color: #ccc;
-          font-weight: 600;
+        .artists {
+          margin-bottom: 15px;
           font-size: 1em;
+          font-weight: 600;
+          span {
+            color: #ccc;
+            font-weight: 600;
+            font-size: 1em;
+          }
+        }
+
+        .lrc {
+          height: 350px;
         }
       }
-
-      .lrc {
-        height: 350px;
+      .comments {
       }
     }
   }

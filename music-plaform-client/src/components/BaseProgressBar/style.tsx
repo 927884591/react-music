@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
 export default styled.div`
+  position: relative;
+  height: 12px;
+  line-height: 12px;
+  z-index: 12;
   width: 100%;
   &:hover {
     .controllDot {

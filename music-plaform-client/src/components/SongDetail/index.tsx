@@ -13,14 +13,18 @@ import playCd from "@/assets/play-cd.png";
 import { CSSTransition } from "react-transition-group";
 import cn from "classnames";
 import { useIsShow } from "@/store/isShow";
+import Comment from "../Comment";
 const SongDetail = memo(() => {
   const { attachImageUrl } = HttpManager;
-  const [isPlay, songPic, songTitle, singerName] = useSong((state: any) => [
-    state.isPlay,
-    state.songPic,
-    state.songTitle,
-    state.singerName,
-  ]);
+  const [isPlay, songPic, songTitle, singerName, songId] = useSong(
+    (state: any) => [
+      state.isPlay,
+      state.songPic,
+      state.songTitle,
+      state.singerName,
+      state.songId,
+    ]
+  );
   const isShow = useIsShow((state: any) => state.isShow);
   console.log(isShow);
 
@@ -55,14 +59,19 @@ const SongDetail = memo(() => {
             </div>
             <div></div>
           </div>
-          <div className="lyric">
-            <div className="name">{songTitle}</div>
-            <div className="artists">
-              歌手：
-              <span>{singerName}</span>
+          <div className="right">
+            <div className="lyric">
+              <div className="name">{songTitle}</div>
+              <div className="artists">
+                歌手：
+                <span>{singerName}</span>
+              </div>
+              <div className="lrc">
+                <Lyric />
+              </div>
             </div>
-            <div className="lrc">
-              <Lyric />
+            <div className="comments">
+              <Comment type={0} playId={songId}></Comment>
             </div>
           </div>
         </div>

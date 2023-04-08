@@ -1,6 +1,7 @@
 import { swiperList } from "./swiperList";
 import { formatSeconds } from "./formatSeconds";
 import { parseLyric } from "./parseLyric";
+import { checkStatus } from "./checkStatus";
 import { getUserSex, getSingerName, getSongTitle } from "./get";
 import { downloadMusic } from "./download";
 export {
@@ -11,4 +12,5 @@ export {
   getSingerName,
   getSongTitle,
   downloadMusic,
+  checkStatus,
 };

@@ -33,16 +33,12 @@ const Login = memo(() => {
     setPassword(event.target.value);
   };
   const login = async () => {
-    // messageApi.info("lalala");
     const params = new URLSearchParams();
     params.append("username", user);
     params.append("password", password);
     //发送登录请求
     const res: any = await signIn(params);
     if (res.success) {
-      // console.log(message.success);
-
-      // message.success("llll");
       //提交用户信息到store中
       setUserId(res.data[0].id);
       setUserPic(res.data[0].avator);

@@ -37,7 +37,7 @@ const HeaderNav = memo(() => {
         return (
           <span
             key={item.label}
-            className={cn(["navItem", curren === item.route ? "active" : ""])}
+            className={cn(["nav-item", curren === item.route ? "active" : ""])}
             onClick={() => {
               changeCurren(item.route);
             }}

@@ -15,6 +15,7 @@ import Artists from "@/components/Artists";
 import AudioTimer from "./AudioTimer";
 import PlayOperations from "./PlayOperations";
 import PlayVolume from "./PlayVolume";
+import LikeBtn from "@/components/LikeBtn";
 
 const PlayBar = memo(() => {
   const attachImageUrl = HttpManager.attachImageUrl;
@@ -85,6 +86,9 @@ const PlayBar = memo(() => {
           <PlayOperations />
         </div>
         <div className="otherOperations">
+          <div className="like">
+            <LikeBtn></LikeBtn>
+          </div>
           <div className="item">{/* <PlayMode /> */}</div>
           <div onClick={togglePlayRecord} className="item">
             <Tooltip title="打开播放列表">

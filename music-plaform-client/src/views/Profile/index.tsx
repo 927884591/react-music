@@ -14,8 +14,8 @@ const Profile = memo(() => {
     state.userId,
     state.userPic,
   ]);
-  console.log(userId, userPic);
-
+  //获取token的用户信息
+  const localInfo = JSON.parse(localStorage.getItem("user") || "") || {};
   //请求用户信息
   async function getUserInfo(id: string) {
     const result = (await HttpManager.getUserOfId(id)) as any;
@@ -55,8 +55,13 @@ const Profile = memo(() => {
       <div className="main">
         <div className="user-info">
           <div className="left">
-            <Avatar size={60} src={userPic}></Avatar>
-            <span className="name">{userInfo.username}</span>
+            <Avatar
+              size={60}
+              src={HttpManager.attachImageUrl(userPic || localInfo.userPic)}
+            ></Avatar>
+            <span className="name">
+              {userInfo.username || localInfo.username}
+            </span>
           </div>
           <Button className="right" onClick={() => navigate(CHANGEINFO)}>
             修改个人信息
