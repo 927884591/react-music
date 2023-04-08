@@ -91,8 +91,6 @@ const MusicList: React.FC<IPorps> = memo((props: IPorps) => {
       dataSource={list}
       onRow={(row: any, index) => ({
         onDoubleClick: () => {
-          console.log(row);
-
           playMusic({
             id: row.id,
             url: row.url,

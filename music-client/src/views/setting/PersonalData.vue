@@ -1,5 +1,10 @@
 <template>
-  <el-form ref="updateForm" label-width="70px" :model="registerForm" :rules="SignUpRules">
+  <el-form
+    ref="updateForm"
+    label-width="70px"
+    :model="registerForm"
+    :rules="SignUpRules"
+  >
     <el-form-item prop="username" label="用户名">
       <el-input v-model="registerForm.username" placeholder="用户名"></el-input>
     </el-form-item>
@@ -11,14 +16,33 @@
       </el-radio-group>
     </el-form-item>
     <el-form-item prop="birth" label="生日">
-      <el-date-picker type="date" placeholder="选择日期" v-model="registerForm.birth" style="width: 100%"></el-date-picker>
+      <el-date-picker
+        type="date"
+        placeholder="选择日期"
+        v-model="registerForm.birth"
+        style="width: 100%"
+      ></el-date-picker>
     </el-form-item>
     <el-form-item prop="introduction" label="签名">
-      <el-input type="textarea" placeholder="签名" v-model="registerForm.introduction"></el-input>
+      <el-input
+        type="textarea"
+        placeholder="签名"
+        v-model="registerForm.introduction"
+      ></el-input>
     </el-form-item>
     <el-form-item prop="location" label="地区">
-      <el-select v-model="registerForm.location" placeholder="地区" style="width: 100%">
-        <el-option v-for="item in AREA" :key="item.value" :label="item.label" :value="item.value"> </el-option>
+      <el-select
+        v-model="registerForm.location"
+        placeholder="地区"
+        style="width: 100%"
+      >
+        <el-option
+          v-for="item in AREA"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        >
+        </el-option>
       </el-select>
     </el-form-item>
     <el-form-item prop="phoneNum" label="手机">
@@ -35,7 +59,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onMounted, getCurrentInstance, reactive } from "vue";
+import {
+  defineComponent,
+  computed,
+  onMounted,
+  getCurrentInstance,
+  reactive,
+} from "vue";
 import { useStore } from "vuex";
 import mixin from "@/mixins/mixin";
 import { AREA, SignUpRules } from "@/enums";
@@ -89,6 +119,7 @@ export default defineComponent({
       params.append("birth", getBirth(registerForm.birth));
       params.append("introduction", registerForm.introduction);
       params.append("location", registerForm.location);
+      console.log(params);
 
       const result = (await HttpManager.updateUserMsg(params)) as ResponseBody;
       (proxy as any).$message({

@@ -42,7 +42,6 @@ const Profile = memo(() => {
       });
     }
   }
-  console.log(333333, list);
 
   //页面加载就发送请求
   useEffect(() => {
@@ -68,7 +67,7 @@ const Profile = memo(() => {
           </Button>
         </div>
         <div className="music-list">
-          <MusicList songlist={list}></MusicList>
+          <MusicList songlist={list} type={1}></MusicList>
         </div>
       </div>
     </Style>

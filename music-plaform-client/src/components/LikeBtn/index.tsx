@@ -17,9 +17,9 @@ const LikeBtn = memo(() => {
     params.append("userId", userId);
     params.append("type", "0"); // 0 代表歌曲， 1 代表歌单
     params.append("songId", songId);
-    setIscollection(
-      ((await HttpManager.isCollection(params)) as ResponseBody).data
-    );
+    const res = ((await HttpManager.isCollection(params)) as ResponseBody).data;
+    console.log(res);
+    setIscollection(res);
   }
   //触发收藏更改方法
   async function changeCollection() {
@@ -41,7 +41,7 @@ const LikeBtn = memo(() => {
   }
   useEffect(() => {
     if (songId) initCollection();
-  }, []);
+  }, [songId]);
   return (
     <Style>
       <input
