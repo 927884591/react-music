@@ -8,7 +8,7 @@ export const useUser = create((set) => ({
   setUserId: (userId: string) => set((state: IUser) => ({ userId })),
   setUsername: (username: string) =>
     set((state: IUser) => {
-      localStorage.setItem("user", JSON.stringify(state));
+      // localStorage.setItem("user", JSON.stringify(state));
       return { username };
     }),
   setUserPic: (userPic: string) => set((state: IUser) => ({ userPic })),

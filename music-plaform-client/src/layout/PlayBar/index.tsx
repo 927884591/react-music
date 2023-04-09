@@ -16,6 +16,7 @@ import AudioTimer from "./AudioTimer";
 import PlayOperations from "./PlayOperations";
 import PlayVolume from "./PlayVolume";
 import LikeBtn from "@/components/LikeBtn";
+import Aside from "@/components/Aside";
 
 const PlayBar = memo(() => {
   const attachImageUrl = HttpManager.attachImageUrl;
@@ -104,6 +105,7 @@ const PlayBar = memo(() => {
           </div>
         </div>
       </div>
+      {showPlayRecord && <Aside></Aside>}
     </Style>
   );
 });

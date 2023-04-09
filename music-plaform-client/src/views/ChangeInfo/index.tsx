@@ -1,6 +1,8 @@
 import React, { memo } from "react";
 import { Tabs, TabsProps } from "antd";
 import PersonalInfo from "@/components/PersonalInfo";
+import AccountSafe from "@/components/AccountSafe";
+import ChangePw from "@/components/ChangePw";
 import Style from "./style";
 const items: any = [
   {
@@ -11,12 +13,12 @@ const items: any = [
   {
     label: `更改密码`,
     key: 2,
-    children: `Content of tab 2`,
+    children: <ChangePw></ChangePw>,
   },
   {
     label: `账号和安全`,
     key: 3,
-    children: `Content of tab 3`,
+    children: <AccountSafe></AccountSafe>,
   },
 ];
 const ChangeInfor = memo(() => {
