@@ -26,7 +26,6 @@ const SongDetail = memo(() => {
     ]
   );
   const isShow = useIsShow((state: any) => state.isShow);
-  console.log(isShow);
 
   return (
     <Style style={{ top: isShow && "0" }}>

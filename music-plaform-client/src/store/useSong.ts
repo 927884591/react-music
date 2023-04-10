@@ -44,7 +44,10 @@ export const useSong = create((set) => ({
   setSongDetails: (songDetails: any) =>
     set((state: ISongType) => ({ songDetails })),
   setCurrentPlayIndex: (currentPlayIndex: number) =>
-    set((state: ISongType) => ({ currentPlayIndex })),
+    set((state: ISongType) => {
+      console.log(currentPlayIndex);
+      return { currentPlayIndex };
+    }),
   //异步请求
   playMusic: (song: any) =>
     set((state: ISongType) => ({

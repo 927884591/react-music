@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import Style from "./style";
 import { useSong } from "@/store/useSong";
 
@@ -8,6 +8,7 @@ import { ReactComponent as PreviousIcon } from "assets/icons/previous.svg";
 import { ReactComponent as NextIcon } from "assets/icons/next.svg";
 
 const PlayOperations = memo(() => {
+  const [index, setIndex] = useState(0);
   //拿到store的状态
   const [
     songUrl,
@@ -33,8 +34,16 @@ const PlayOperations = memo(() => {
   // useEffect(() => {
   //   next();
   // }, [autoNext]);
-
   // 开始 / 暂停
+  useSong.subscribe((state: any) => {
+    // console.log(state.currentPlayIndex);
+    setIndex((index) => state.currentPlayIndex);
+    console.log(state.currentPlayIndex);
+  });
+  useEffect(() => {
+    toPlay(currentPlayList[index]?.url);
+  }, [index]);
+
   const togglePlay = () => {
     !isPlay ? setIsPlay(true) : setIsPlay(false);
   };
@@ -42,36 +51,35 @@ const PlayOperations = memo(() => {
     //如果列表中到最后了，就回到第一个重新播放
     if (currentPlayIndex < currentPlayList.length) {
       setCurrentPlayIndex(currentPlayIndex + 1);
-      console.log(currentPlayIndex);
-
-      toPlay(currentPlayList[currentPlayIndex].url);
+      console.log(index);
+      // toPlay(currentPlayList[index].url);
     } else {
       setCurrentPlayIndex(0);
       toPlay(currentPlayList[0].url);
     }
   };
   const pre = () => {
-    //如果列表中到最后了，就回到第一个重新播放
-    if (currentPlayIndex < currentPlayList.length) {
-      console.log(currentPlayIndex);
+    //如果列表中到最前面了，就回到最后一个重新播放
+    if (currentPlayIndex > 0) {
+      console.log(index);
       setCurrentPlayIndex(currentPlayIndex - 1);
-      console.log(currentPlayIndex);
-      toPlay(currentPlayList[currentPlayIndex].url);
+      console.log(index);
+      // toPlay(currentPlayList[index].url);
     } else {
       setCurrentPlayIndex(currentPlayList.length - 1);
-      toPlay(currentPlayList[currentPlayList.length].url);
+      toPlay(currentPlayList[currentPlayList.length - 1].url);
     }
   };
   //触发播放方法
   const toPlay = (url: string) => {
     console.log(url, songUrl, currentPlayIndex);
     if (url && url !== songUrl) {
-      const song = currentPlayList[currentPlayIndex];
+      const song = currentPlayList[index];
       playMusic({
         id: song.id,
         url,
         pic: song.pic,
-        index: currentPlayIndex,
+        index: index,
         name: song.name,
         lyric: song.lyric,
         singerName: song.singerName,
@@ -86,7 +94,6 @@ const PlayOperations = memo(() => {
         <PreviousIcon width="20px" />
       </div>
       <div className="pause" onClick={() => togglePlay()}>
-        {/* {audioState?.paused ? <PlayCircleFilled /> : <PauseCircleFilled />} */}
         {!isPlay ? (
           <PlayIcon width="25px"></PlayIcon>
         ) : (

@@ -1,4 +1,4 @@
-import { useState, Suspense, memo, useEffect } from "react";
+import { useState, memo, useEffect } from "react";
 import Layout from "./layout";
 import { useUser } from "./store/useUser";
 let user: any = localStorage.getItem("user");
@@ -18,9 +18,9 @@ const App = memo(() => {
   //   setUsername(user?.username);
   // }
   useEffect(() => {
-    user = JSON.parse(user || "");
-    console.log(user.id);
     if (user) {
+      user = JSON.parse(user || "") || {};
+      console.log(user?.id);
       setUserId(user?.id);
       setUsername(user?.username);
     }

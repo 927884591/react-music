@@ -64,7 +64,6 @@ const MusicList: React.FC<IPorps> = memo((props: IPorps) => {
     state.setCurrentPlayList,
   ]);
   const { songlist, type } = props;
-  console.log(songlist);
 
   //播放列表
   const [list, setList]: any = useState([]);

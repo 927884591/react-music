@@ -19,11 +19,10 @@ import Login from "@/views/Login";
 import Search from "@/views/Search";
 import Profile from "@/views/Profile";
 import ChangeInfor from "@/views/ChangeInfo";
+import Home from "@/views/Home";
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
 
-const App = lazy(() => import("@/App"));
-const Home = lazy(() => import("@/views/Home"));
 export const router = [
   {
     path: ROOT,
