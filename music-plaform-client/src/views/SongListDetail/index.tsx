@@ -4,20 +4,73 @@ import { useParams } from "react-router-dom";
 import useAsyncFn from "@/hooks/useAsyncFn";
 import { HttpManager } from "@/api";
 import { useSong } from "@/store/useSong";
+import { useUser } from "@/store/useUser";
 import Card from "@/components/Card";
-import { Rate } from "antd";
+import { Rate, message } from "antd";
 import MusicList from "@/components/MusicList";
 import Comment from "@/components/Comment";
 
 const SongListDetail = memo(() => {
+  //保存自己评分的值
+  const [score, setScore] = useState(0);
+  //是否禁用评分功能
+  const [disabledRank, setDisableRank] = useState(false);
+  //用户是否评分
+  const [assistText, setAssistText] = useState("评分");
+  //请求评分信息
   const [rankList, rankListFn]: any = useAsyncFn(
     HttpManager.getRankOfSongListId
   );
+
   const [listSongOfSongId, listSongOfSongIdFn] = useAsyncFn(
     HttpManager.getListSongOfSongId
   );
+  //请求用户自己的评分信息
+  async function getUserRank(userId: string, songListId: string) {
+    const result = (await HttpManager.getUserRank(
+      userId,
+      songListId
+    )) as ResponseBody;
+    setScore(result.data / 2);
+    setDisableRank(true);
+    setAssistText("已评价");
+  }
+  //出发更改评分操作
+  const onChangeScore = (score: number) => {
+    //同步更新score评分信息
+    setScore(() => score);
+    //然后提交评分
+    pushValue();
+  };
+  // 提交评分
+  async function pushValue() {
+    if (disabledRank) return;
+
+    const params = new URLSearchParams();
+    if (id) {
+      params.append("songListId", id);
+      params.append("consumerId", userId);
+      params.append("score", (score * 2).toString());
+    }
+
+    try {
+      const result = (await HttpManager.setRank(params)) as ResponseBody;
+
+      message.success(result.message);
+
+      if (result.success) {
+        rankListFn(id);
+        setDisableRank(true);
+        setAssistText("已评价");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
   //store
   const song: any = useSong();
+  //获取userId
+  const [userId] = useUser((state: any) => [state.userId]);
   //路由参数
   const { id } = useParams();
   //收集歌单中歌的列表
@@ -25,7 +78,7 @@ const SongListDetail = memo(() => {
 
   //如果本地有拿本地的
   const songDetailStr = localStorage.getItem("songDetail") || "";
-  console.log(songDetailStr);
+  console.log(rankList);
 
   const songDetails = song.songDetails
     ? song.songDetails
@@ -59,6 +112,9 @@ const SongListDetail = memo(() => {
       rankListFn(id);
       listSongOfSongIdFn(id);
     }
+    if (userId && id) {
+      getUserRank(userId, id);
+    }
   }, [id]);
 
   return (
@@ -82,8 +138,14 @@ const SongListDetail = memo(() => {
         </div>
         <span>{rankList.value * 2}</span>
         <div>
-          <h3>评分</h3>
-          <Rate allowHalf defaultValue={0} value={rankList?.value} />
+          <h3>{assistText}</h3>
+          <Rate
+            disabled={disabledRank}
+            allowHalf
+            defaultValue={0}
+            value={score}
+            onChange={onChangeScore}
+          />
         </div>
         <MusicList songlist={currentSongList} type={1}></MusicList>
         <div className="comments">

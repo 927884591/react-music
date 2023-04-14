@@ -98,7 +98,6 @@ export default defineComponent({
     // 提交评分
     async function pushValue() {
       if (disabledRank.value || !checkStatus()) return;
-
       const params = new URLSearchParams();
       params.append("songListId", songListId.value);
       params.append("consumerId", userId.value);

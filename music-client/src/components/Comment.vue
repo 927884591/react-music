@@ -4,12 +4,24 @@
       <span>评论</span>
       <span class="comment-desc">共 {{ commentList.length }} 条评论</span>
     </h2>
-    <el-input class="comment-input" type="textarea" placeholder="期待您的精彩评论..." :rows="2" v-model="textarea" />
-    <el-button class="sub-btn" type="primary" @click="submitComment()">发表评论</el-button>
+    <el-input
+      class="comment-input"
+      type="textarea"
+      placeholder="期待您的精彩评论..."
+      :rows="2"
+      v-model="textarea"
+    />
+    <el-button class="sub-btn" type="primary" @click="submitComment()"
+      >发表评论</el-button
+    >
   </div>
   <ul class="popular">
     <li v-for="(item, index) in commentList" :key="index">
-      <el-image class="popular-img" fit="contain" :src="attachImageUrl(item.avator)" />
+      <el-image
+        class="popular-img"
+        fit="contain"
+        :src="attachImageUrl(item.avator)"
+      />
       <div class="popular-msg">
         <ul>
           <li class="name">{{ item.username }}</li>
@@ -17,16 +29,33 @@
           <li class="content">{{ item.content }}</li>
         </ul>
       </div>
-      <div ref="up" class="comment-ctr" @click="setSupport(item.id, item.up, index)">
+      <div
+        ref="up"
+        class="comment-ctr"
+        @click="setSupport(item.id, item.up, index)"
+      >
         <div><yin-icon :icon="iconList.Support"></yin-icon> {{ item.up }}</div>
-        <el-icon v-if="item.userId === userId" @click="deleteComment(item.id, index)"><delete /></el-icon>
+        <el-icon
+          v-if="item.userId === userId"
+          @click="deleteComment(item.id, index)"
+          ><delete
+        /></el-icon>
       </div>
     </li>
   </ul>
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, ref, toRefs, computed, watch, reactive, onMounted } from "vue";
+import {
+  defineComponent,
+  getCurrentInstance,
+  ref,
+  toRefs,
+  computed,
+  watch,
+  reactive,
+  onMounted,
+} from "vue";
 import { useStore } from "vuex";
 import { Delete } from "@element-plus/icons-vue";
 import YinIcon from "@/components/layouts/YinIcon.vue";
@@ -64,11 +93,16 @@ export default defineComponent({
     // 获取所有评论
     async function getComment() {
       try {
-        const result = (await HttpManager.getAllComment(type.value, playId.value)) as ResponseBody;
+        const result = (await HttpManager.getAllComment(
+          type.value,
+          playId.value
+        )) as ResponseBody;
         commentList.value = result.data;
         for (let index = 0; index < commentList.value.length; index++) {
           // 获取评论用户的昵称和头像
-          const resultUser = (await HttpManager.getUserOfId(commentList.value[index].userId)) as ResponseBody;
+          const resultUser = (await HttpManager.getUserOfId(
+            commentList.value[index].userId
+          )) as ResponseBody;
           commentList.value[index].avator = resultUser.data[0].avator;
           commentList.value[index].username = resultUser.data[0].username;
         }

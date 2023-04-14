@@ -72,6 +72,7 @@ const HttpManager = {
   setSupport: (params: any) => post(`comment/like`, params),
   // 返回所有评论
   getAllComment: (type: number, id: string) => {
+    //一个歌单的评论，0是歌曲的评论
     let url = "";
     if (type === 1) {
       url = `comment/songList/detail?songListId=${id}`;
