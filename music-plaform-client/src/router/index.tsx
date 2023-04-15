@@ -10,6 +10,7 @@ import {
   SEARCH,
   PROFILE,
   CHANGEINFO,
+  SIGNUP,
 } from "@/constants/router";
 import Singers from "@/views/Singers";
 import Songlist from "@/views/Songlist";
@@ -22,6 +23,7 @@ import ChangeInfor from "@/views/ChangeInfo";
 import Home from "@/views/Home";
 import { lazy } from "react";
 import { Navigate } from "react-router-dom";
+import SignupForm from "@/views/Signup";
 
 export const router = [
   {
@@ -63,5 +65,9 @@ export const router = [
   {
     path: CHANGEINFO,
     element: <ChangeInfor></ChangeInfor>,
+  },
+  {
+    path: SIGNUP,
+    element: <SignupForm></SignupForm>,
   },
 ];

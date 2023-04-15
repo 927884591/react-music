@@ -78,7 +78,6 @@ const SongListDetail = memo(() => {
 
   //如果本地有拿本地的
   const songDetailStr = localStorage.getItem("songDetail") || "";
-  console.log(rankList);
 
   const songDetails = song.songDetails
     ? song.songDetails

@@ -6,7 +6,7 @@ import { HttpManager } from "@/api";
 import { useUser } from "@/store/useUser";
 import { useConfigure } from "@/store/configure";
 import { useNavigate } from "react-router-dom";
-import { HOME } from "@/constants/router";
+import { HOME, SIGNUP } from "@/constants/router";
 import { message } from "antd";
 
 const Login = memo(() => {
@@ -86,7 +86,9 @@ const Login = memo(() => {
               value={password ? password : undefined}
               onChange={(e) => changePassword(e)}
             />
-            <span className="register">注册</span>
+            <span className="register" onClick={() => navigate(SIGNUP)}>
+              注册
+            </span>
             <button className="login" onClick={login}>
               登录
             </button>

@@ -2,7 +2,7 @@ import React, { memo, useEffect } from "react";
 import { useState } from "react";
 import Style from "./style";
 import { useNavigate } from "react-router-dom";
-import { LOGIN, SEARCH, PROFILE, CHANGEINFO } from "@/constants/router";
+import { LOGIN, SEARCH, PROFILE, CHANGEINFO, SIGNUP } from "@/constants/router";
 import { HttpManager } from "@/api";
 import { useConfigure } from "@/store/configure";
 import { useUser } from "@/store/useUser";
@@ -77,7 +77,9 @@ const NavRight = memo(() => {
             登录
           </div>
 
-          <div className="register">注册</div>
+          <div className="register" onClick={() => navigate(SIGNUP)}>
+            注册
+          </div>
         </div>
       ) : (
         <div className="user-info">

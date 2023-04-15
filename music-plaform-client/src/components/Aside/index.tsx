@@ -6,7 +6,6 @@ const Aside = memo(() => {
   console.log(song);
   const toPlay = (item: any, index: number) => {
     console.log(item);
-
     song?.playMusic({
       id: item.id,
       url: item.url,

@@ -37,7 +37,7 @@ const Audio = memo(() => {
     song.setCurTime(audioEl.current.currentTime);
   };
   const ended = () => {
-    song.setIsplay(false);
+    song.setIsPlay(false);
     song.setCurTime(0);
     song.setAutoNext(!song.autoNext);
   };

@@ -1,6 +1,11 @@
 import styled from "styled-components";
 
 export default styled.div`
+  .icon {
+    height: 20px;
+    width: 20px;
+    margin-right: 20px;
+  }
   .prev,
   .next,
   .pause {

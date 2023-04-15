@@ -11,7 +11,7 @@ export const useSong = create((set) => ({
 
   /** 音乐播放信息 */
   isPlay: false, // 播放状态
-  playBtnIcon: "", // 播放状态的图标
+  playBtnIcon: "shunxu", // 播放状态的图标
   volume: 1, // 音量
   duration: 0, // 音乐时长
   curTime: 0, // 当前音乐的播放位置
